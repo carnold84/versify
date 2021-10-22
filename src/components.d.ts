@@ -6,69 +6,52 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
-    }
     interface VButton {
+    }
+    interface VModal {
+        "maxWidth": string;
+        "modalId": string;
+        "modalTitle": string;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
-    }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
-    };
     interface HTMLVButtonElement extends Components.VButton, HTMLStencilElement {
     }
     var HTMLVButtonElement: {
         prototype: HTMLVButtonElement;
         new (): HTMLVButtonElement;
     };
+    interface HTMLVModalElement extends Components.VModal, HTMLStencilElement {
+    }
+    var HTMLVModalElement: {
+        prototype: HTMLVModalElement;
+        new (): HTMLVModalElement;
+    };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
         "v-button": HTMLVButtonElement;
+        "v-modal": HTMLVModalElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
-    }
     interface VButton {
     }
+    interface VModal {
+        "maxWidth"?: string;
+        "modalId"?: string;
+        "modalTitle"?: string;
+        "onClosed"?: (event: CustomEvent<string>) => void;
+    }
     interface IntrinsicElements {
-        "my-component": MyComponent;
         "v-button": VButton;
+        "v-modal": VModal;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "v-button": LocalJSX.VButton & JSXBase.HTMLAttributes<HTMLVButtonElement>;
+            "v-modal": LocalJSX.VModal & JSXBase.HTMLAttributes<HTMLVModalElement>;
         }
     }
 }

@@ -10,7 +10,9 @@ describe('v-button', () => {
     expect(page.root).toEqualHtml(`
       <v-button>
         <mock:shadow-root>
-          <slot></slot>
+          <button class="v_button">
+            <slot></slot>
+          </button>
         </mock:shadow-root>
       </v-button>
     `);
