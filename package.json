@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "@stencil/core": "^2.7.0",
-    "@storybook/addon-a11y": "^6.3.12"
+    "@storybook/addon-a11y": "^6.3.12",
+    "animate-presence": "^0.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",

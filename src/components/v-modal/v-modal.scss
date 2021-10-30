@@ -5,30 +5,53 @@
   --modal_fontFamily: 'Inter', sans-serif;
 
   align-items: center;
-  display: flex;
+  display: none;
   height: 100%;
   justify-content: center;
   position: relative;
+
+  &.is_visible {
+    display: flex;
+  }
 }
 
 .overlay {
   background-color: var(--modal_overlay_bgColor);
+  display: none;
   height: 100%;
   left: 0;
-  opacity: 0.5;
+  opacity: 0;
   position: absolute;
   top: 0;
+  transition: opacity 5000ms ease-in-out;
   width: 100%;
   z-index: 0;
+
+  .is_open & {
+    opacity: 0.5;
+  }
+
+  .is_visible & {
+    display: block;
+  }
 }
 
 .container {
   background-color: var(--modal_container_bgColor);
   box-shadow: var(--modal_container_shadow);
-  display: flex;
+  display: none;
   flex-direction: column;
+  opacity: 0;
   width: 100%;
   z-index: 1;
+
+  .is_open & {
+    opacity: 1;
+  }
+
+  .is_visible & {
+    display: flex;
+  }
 }
 
 .header {
