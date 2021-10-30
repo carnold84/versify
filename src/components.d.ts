@@ -9,7 +9,7 @@ export namespace Components {
     interface VButton {
     }
     interface VModal {
-        "isOpen": Boolean;
+        "isOpen": boolean;
         "maxWidth": string;
         "modalId": string;
         "modalTitle": string;
@@ -37,7 +37,7 @@ declare namespace LocalJSX {
     interface VButton {
     }
     interface VModal {
-        "isOpen"?: Boolean;
+        "isOpen"?: boolean;
         "maxWidth"?: string;
         "modalId"?: string;
         "modalTitle"?: string;

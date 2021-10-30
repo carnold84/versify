@@ -7,47 +7,47 @@ import 'animate-presence';
   shadow: true,
 })
 export class VModal {
+  elOverlay: HTMLElement;
+
   @Element() el: HTMLElement;
 
-  @Prop() isOpen: Boolean = true;
+  @Prop() isOpen: boolean = true;
   @Prop() maxWidth: string = '600px';
   @Prop() modalId: string;
   @Prop() modalTitle: string;
 
   @Event() closed: EventEmitter<string>;
 
-  @State() isVisible: Boolean = false;
+  @State() isVisible: boolean = false;
+  @State() show: boolean = false;
 
   @Watch('isOpen')
-  handleIsOpen(newValue: Boolean) {
-    console.log(newValue);
+  handleIsOpen(newValue: boolean) {
     if (newValue === true) {
       this.isVisible = true;
+      setTimeout(() => {
+        this.show = true;
+      }, 100);
     } else {
-      this.el.addEventListener('transitionend', this.onCloseEnd);
-      this.isVisible = false;
+      this.elOverlay.addEventListener('transitionend', this.onCloseEnd);
+      this.show = false;
     }
   }
 
-  connectedCallback() {
-    console.log(this);
-  }
-
   onClose = () => {
-    console.log('ONCLOSE');
     this.closed.emit(this.modalId);
   };
 
   onCloseEnd = () => {
-    this.el.removeEventListener('transitionend', this.onCloseEnd);
+    this.isVisible = false;
+    this.elOverlay.removeEventListener('transitionend', this.onCloseEnd);
   };
 
   render() {
-    console.log(this.maxWidth);
-    const classes = ['container'];
+    const classes = [];
 
-    if (this.isOpen) {
-      classes.push('is_open');
+    if (this.show) {
+      classes.push('show');
     }
 
     if (this.isVisible) {
@@ -55,8 +55,8 @@ export class VModal {
     }
 
     return (
-      <Host>
-        <div class={classes.join(' ')} style={{ maxWidth: this.maxWidth }}>
+      <Host class={classes.join(' ')}>
+        <div class={[...classes, 'container'].join(' ')} style={{ maxWidth: this.maxWidth }}>
           <div class="header">
             <h1 class="title">{this.modalTitle}</h1>
             <v-button onClick={this.onClose}>Close</v-button>
@@ -65,7 +65,7 @@ export class VModal {
             <slot></slot>
           </div>
         </div>
-        <div class="overlay"></div>
+        <div class={[...classes, 'overlay'].join(' ')} ref={el => (this.elOverlay = el)}></div>
       </Host>
     );
   }

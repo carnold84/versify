@@ -3,16 +3,17 @@
   --modal_container_shadow: 0 0 5px 0 rgba(0, 0, 0, 0.075), 0 0 10px 2px rgba(0, 0, 0, 0.075), 0 0 15px 3px rgba(0, 0, 0, 0.075), 0 0 20px 4px rgba(0, 0, 0, 0.075);
   --modal_overlay_bgColor: #000000;
   --modal_fontFamily: 'Inter', sans-serif;
+  --transition_duration: 500ms;
 
   align-items: center;
   display: none;
   height: 100%;
   justify-content: center;
   position: relative;
+}
 
-  &.is_visible {
-    display: flex;
-  }
+:host(.is_visible) {
+  display: flex;
 }
 
 .overlay {
@@ -23,16 +24,16 @@
   opacity: 0;
   position: absolute;
   top: 0;
-  transition: opacity 5000ms ease-in-out;
+  transition: opacity var(--transition_duration) ease-in-out;
   width: 100%;
   z-index: 0;
 
-  .is_open & {
-    opacity: 0.5;
+  &.is_visible {
+    display: block;
   }
 
-  .is_visible & {
-    display: block;
+  &.show {
+    opacity: 0.5;
   }
 }
 
@@ -42,15 +43,16 @@
   display: none;
   flex-direction: column;
   opacity: 0;
+  transition: opacity var(--transition_duration) ease-in-out;
   width: 100%;
   z-index: 1;
 
-  .is_open & {
-    opacity: 1;
+  &.is_visible {
+    display: flex;
   }
 
-  .is_visible & {
-    display: flex;
+  &.show {
+    opacity: 1;
   }
 }
 
