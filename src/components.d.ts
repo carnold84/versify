@@ -8,11 +8,16 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface VButton {
     }
+    interface VCancelIcon {
+    }
     interface VModal {
         "isOpen": boolean;
         "maxWidth": string;
         "modalId": string;
         "modalTitle": string;
+    }
+    interface VSvgIcon {
+        "size": number;
     }
 }
 declare global {
@@ -22,19 +27,35 @@ declare global {
         prototype: HTMLVButtonElement;
         new (): HTMLVButtonElement;
     };
+    interface HTMLVCancelIconElement extends Components.VCancelIcon, HTMLStencilElement {
+    }
+    var HTMLVCancelIconElement: {
+        prototype: HTMLVCancelIconElement;
+        new (): HTMLVCancelIconElement;
+    };
     interface HTMLVModalElement extends Components.VModal, HTMLStencilElement {
     }
     var HTMLVModalElement: {
         prototype: HTMLVModalElement;
         new (): HTMLVModalElement;
     };
+    interface HTMLVSvgIconElement extends Components.VSvgIcon, HTMLStencilElement {
+    }
+    var HTMLVSvgIconElement: {
+        prototype: HTMLVSvgIconElement;
+        new (): HTMLVSvgIconElement;
+    };
     interface HTMLElementTagNameMap {
         "v-button": HTMLVButtonElement;
+        "v-cancel-icon": HTMLVCancelIconElement;
         "v-modal": HTMLVModalElement;
+        "v-svg-icon": HTMLVSvgIconElement;
     }
 }
 declare namespace LocalJSX {
     interface VButton {
+    }
+    interface VCancelIcon {
     }
     interface VModal {
         "isOpen"?: boolean;
@@ -43,9 +64,14 @@ declare namespace LocalJSX {
         "modalTitle"?: string;
         "onClosed"?: (event: CustomEvent<string>) => void;
     }
+    interface VSvgIcon {
+        "size"?: number;
+    }
     interface IntrinsicElements {
         "v-button": VButton;
+        "v-cancel-icon": VCancelIcon;
         "v-modal": VModal;
+        "v-svg-icon": VSvgIcon;
     }
 }
 export { LocalJSX as JSX };
@@ -53,7 +79,9 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "v-button": LocalJSX.VButton & JSXBase.HTMLAttributes<HTMLVButtonElement>;
+            "v-cancel-icon": LocalJSX.VCancelIcon & JSXBase.HTMLAttributes<HTMLVCancelIconElement>;
             "v-modal": LocalJSX.VModal & JSXBase.HTMLAttributes<HTMLVModalElement>;
+            "v-svg-icon": LocalJSX.VSvgIcon & JSXBase.HTMLAttributes<HTMLVSvgIconElement>;
         }
     }
 }
